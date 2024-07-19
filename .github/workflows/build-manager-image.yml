@@ -39,8 +39,8 @@ jobs:
           platforms:
             - linux/amd64
             - linux/arm64
-          build-args:
-            - WAZUH_VERSION=${{ env.WAZUH_VERSION }}
-            - WAZUH_TAG_REVISION=1
-            - FILEBEAT_TEMPLATE_BRANCH=${{ env.WAZUH_VERSION }}
-            - WAZUH_FILEBEAT_MODULE=wazuh-filebeat-0.3.tar.gz
+          build-args: |
+            WAZUH_VERSION=${{ env.WAZUH_VERSION }}
+            WAZUH_TAG_REVISION=1
+            FILEBEAT_TEMPLATE_BRANCH=${{ env.WAZUH_VERSION }}
+            WAZUH_FILEBEAT_MODULE=wazuh-filebeat-0.3.tar.gz

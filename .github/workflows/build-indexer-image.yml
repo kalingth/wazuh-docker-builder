@@ -39,6 +39,6 @@ jobs:
           platforms:
             - linux/amd64
             - linux/arm64
-          build-args:
-            - WAZUH_VERSION=${{ env.WAZUH_VERSION }}
-            - WAZUH_TAG_REVISION=1
+          build-args: |
+            WAZUH_VERSION=${{ env.WAZUH_VERSION }}
+            WAZUH_TAG_REVISION=1
