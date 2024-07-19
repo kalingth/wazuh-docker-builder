@@ -20,6 +20,19 @@ elif [ "$MAJOR_BUILD" -eq "$MAJOR_CURRENT" ]; then
   fi
 fi
 
-curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-arm64.deb &&\
-dpkg -i ${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-arm64.deb && rm -f ${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-arm64.deb && \
+
+function getArch() {
+  case $(arch) in
+    'aarch64') echo "${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-arm64.deb" ;;
+    'x86_64')  echo "${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-amd64.deb"     ;;
+    *)
+      echo "Architecture $(arch) not supported" >> /dev/stderr;
+      exit 1;
+    ;;
+  esac
+}
+
+FILEBEAT_PKG=$(getArch);
+curl -L -O "https://artifacts.elastic.co/downloads/beats/filebeat/${FILEBEAT_PKG}" &&\
+dpkg -i "${FILEBEAT_PKG}" && rm -f "${FILEBEAT_PKG}" && \
 curl -s https://${REPOSITORY}/filebeat/${WAZUH_FILEBEAT_MODULE} | tar -xvz -C /usr/share/filebeat/module
