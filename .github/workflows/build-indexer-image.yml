@@ -35,7 +35,9 @@ jobs:
         with:
           context: wazuh-indexer/
           push: true
-          tags: kalingth/wazuh-indexer:${{ env.WAZUH_VERSION }}
+          tags: |
+            kalingth/wazuh-indexer:${{ env.WAZUH_VERSION }}
+            kalingth/wazuh-indexer:latest
           platforms: |
             linux/amd64
             linux/arm64
