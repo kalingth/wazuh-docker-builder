@@ -12,23 +12,17 @@ ARG WAZUH_FILEBEAT_MODULE
 
 RUN apt-get update && apt install curl apt-transport-https lsb-release gnupg zip -y
 
-COPY config/check_repository.sh /
-RUN chmod 775 /check_repository.sh
+COPY --chmod=755 config/check_repository.sh /
 RUN source /check_repository.sh
 
-RUN apt-get update && \
-    apt-get install wazuh-manager=${WAZUH_VERSION}-${WAZUH_TAG_REVISION}
+RUN apt-get update && apt-get install wazuh-manager=${WAZUH_VERSION}-${WAZUH_TAG_REVISION}
 
-COPY config/filebeat_module.sh /
-RUN chmod 775 /filebeat_module.sh
+COPY --chmod=755 config/filebeat_module.sh /
 RUN source /filebeat_module.sh
 
 ARG S6_VERSION="v2.2.0.3"
-RUN curl --fail --silent -L https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-arm.tar.gz \
-    -o /tmp/s6-overlay-arm.tar.gz && \
-    tar xzf /tmp/s6-overlay-arm.tar.gz -C / --exclude="./bin" && \
-    tar xzf /tmp/s6-overlay-arm.tar.gz -C /usr ./bin && \
-    rm  /tmp/s6-overlay-arm.tar.gz
+COPY --chmod=755 config/s6-overlay-install.sh /
+RUN /s6-overlay-install.sh && rm /s6-overlay-install.sh
 
 COPY config/etc/ /etc/
 COPY --chown=root:wazuh config/create_user.py /var/ossec/framework/scripts/create_user.py
