@@ -1,6 +1,6 @@
 # Wazuh Docker Builder
 
-This repository offers an alternative to the "wazuh-docker" project, introducing several improvements and additional features. The primary focus is on building Docker images through a CI/CD pipeline for both amd64 and arm64 platforms. This extends the original project's compatibility by adding support for arm64.
+This repository offers an alternative to the [wazuh-docker project](https://github.com/wazuh/wazuh-docker), introducing several improvements and additional features. The primary focus is on building Docker images through a CI/CD pipeline for both amd64 and arm64 platforms. This extends the original project's compatibility by adding support for arm64.
 
 ## Key Features
 
