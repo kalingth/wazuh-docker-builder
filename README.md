@@ -29,9 +29,9 @@ This repository offers an alternative to the "wazuh-docker" project, introducing
 ## Getting Started
 
 To pull the latest images from Docker Hub, use the following commands:
-- docker pull kalingth/wazuh-indexer:<tag>
-- docker pull kalingth/wazuh-dashboard:<tag>
-- docker pull kalingth/wazuh-manager:<tag>
+- docker pull kalingth/wazuh-indexer:`<tag>`
+- docker pull kalingth/wazuh-dashboard:`<tag>`
+- docker pull kalingth/wazuh-manager:`<tag>`
 
 Replace `<tag>` with the appropriate values for your desired image.
 
